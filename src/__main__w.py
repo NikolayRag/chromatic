@@ -4,7 +4,7 @@ import Ui
 from Args import *
 
 
-AppName = 'TemplatePySide2'
+AppName = 'chromatic'
 
 
 AppPrefs = {
@@ -19,7 +19,7 @@ AppPrefs = {
 		'tray': [0],
 		'dnd': [0],
 		'hold': [0],
-		'msg': ['pwned'],
+		'msg': ['chromatic'],
 	}
 }
 

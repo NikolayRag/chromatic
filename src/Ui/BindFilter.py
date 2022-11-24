@@ -51,7 +51,7 @@ class BindFilter(QObject):
 			else:
 				return False
 
-#  todo 375 (issue) +0: consider passing affected object to provided function
+
 		fn = self.eventTypes[cType]
 
 		return bool(fn(_e))

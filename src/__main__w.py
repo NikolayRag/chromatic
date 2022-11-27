@@ -39,12 +39,15 @@ resStyle = path.join(modulePath,'Ui/styles/default.qss')
 if __name__ == '__main__':
 	Args(AppPrefs, AppName, cmdlineBlock='Cmdline')
 
-#	cDev = DisplayMagnifix()
-	cDev = DeviceMidiMX()
+	cDev = (
+		DisplayMagnifix(),
+		DeviceMidiMX(),
+	)
 	cTools = ColorTools()
 
 	cUi = Ui.Ui(resUi, AppName, resIcon, resStyle)
 	cUi.setup(cDev, cTools)
 	cUi.go()
 
-	cDev.relax()
+	for d in cDev:
+		d.relax()

@@ -81,7 +81,10 @@ class Ui():
 
 
 	def setup(self, _dev, _tool):
-		self.appWin.setBehavior(tool1=_tool.getColor, tool2=_dev.setRrrGggBbb)
+		self.appWin.setBehavior(
+			tool1=_tool.getColor,
+			tool2=list(dev.setRrrGggBbb for dev in _dev)
+		)
 
 
 

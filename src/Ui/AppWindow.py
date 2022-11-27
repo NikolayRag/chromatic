@@ -246,12 +246,16 @@ class AppWindow(QObject):
 
 
 		def sliderMatrix():
-			tool2(
-				(self.wSliderRr.value()/255., self.wSliderRg.value()/255., self.wSliderRb.value()/255.),
-				(self.wSliderGr.value()/255., self.wSliderGg.value()/255., self.wSliderGb.value()/255.),
-				(self.wSliderBr.value()/255., self.wSliderBg.value()/255., self.wSliderBb.value()/255.),
-				(self.wSliderLr.value()/255., self.wSliderLg.value()/255., self.wSliderLb.value()/255.)
-			)
+			for cTool in tool2:
+				cTool(
+					(self.wSliderRr.value()/255., self.wSliderRg.value()/255., self.wSliderRb.value()/255.),
+					(self.wSliderGr.value()/255., self.wSliderGg.value()/255., self.wSliderGb.value()/255.),
+					(self.wSliderBr.value()/255., self.wSliderBg.value()/255., self.wSliderBb.value()/255.),
+					(self.wSliderLr.value()/255., self.wSliderLg.value()/255., self.wSliderLb.value()/255.)
+				)
+		
+		sliderMatrix()
+
 
 		self.wSliderRr.valueChanged.connect(sliderMatrix)
 		self.wSliderRg.valueChanged.connect(sliderMatrix)

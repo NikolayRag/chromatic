@@ -22,6 +22,10 @@ class AppWindow(QObject):
 	wMain = None
 	wCaption = None
 	wButton = None
+	wSliderRr = wSliderRg = wSliderRb = None
+	wSliderGr = wSliderGg = wSliderGb = None
+	wSliderBr = wSliderBg = wSliderBb = None
+	wSliderLr = wSliderLg = wSliderLb = None
 
 
 	flagCheckExit = True
@@ -129,6 +133,20 @@ class AppWindow(QObject):
 
 		self.wButton= cMain.findChild(QPushButton, "btnColor")
 
+		self.wSliderRr= cMain.findChild(QSlider, "sliderRr")
+		self.wSliderRg= cMain.findChild(QSlider, "sliderRg")
+		self.wSliderRb= cMain.findChild(QSlider, "sliderRb")
+		self.wSliderGr= cMain.findChild(QSlider, "sliderGr")
+		self.wSliderGg= cMain.findChild(QSlider, "sliderGg")
+		self.wSliderGb= cMain.findChild(QSlider, "sliderGb")
+		self.wSliderBr= cMain.findChild(QSlider, "sliderBr")
+		self.wSliderBg= cMain.findChild(QSlider, "sliderBg")
+		self.wSliderBb= cMain.findChild(QSlider, "sliderBb")
+
+		self.wSliderLr= cMain.findChild(QSlider, "sliderLr")
+		self.wSliderLg= cMain.findChild(QSlider, "sliderLg")
+		self.wSliderLb= cMain.findChild(QSlider, "sliderLb")
+
 		
 
 		if isTool:
@@ -207,8 +225,30 @@ class AppWindow(QObject):
 
 
 
-	def setBehavior(self, _tool):
-		self.wButton.pressed.connect(_tool)
+	def setBehavior(self, tool1, tool2):
+		def sliderMatrix():
+			tool2(
+				(self.wSliderRr.value()/255., self.wSliderRg.value()/255., self.wSliderRb.value()/255.),
+				(self.wSliderGr.value()/255., self.wSliderGg.value()/255., self.wSliderGb.value()/255.),
+				(self.wSliderBr.value()/255., self.wSliderBg.value()/255., self.wSliderBb.value()/255.),
+				(self.wSliderLr.value()/255., self.wSliderLg.value()/255., self.wSliderLb.value()/255.)
+			)
+
+
+		self.wButton.pressed.connect(tool1)
+
+		self.wSliderRr.valueChanged.connect(sliderMatrix)
+		self.wSliderRg.valueChanged.connect(sliderMatrix)
+		self.wSliderRb.valueChanged.connect(sliderMatrix)
+		self.wSliderGr.valueChanged.connect(sliderMatrix)
+		self.wSliderGg.valueChanged.connect(sliderMatrix)
+		self.wSliderGb.valueChanged.connect(sliderMatrix)
+		self.wSliderBr.valueChanged.connect(sliderMatrix)
+		self.wSliderBg.valueChanged.connect(sliderMatrix)
+		self.wSliderBb.valueChanged.connect(sliderMatrix)
+		self.wSliderLr.valueChanged.connect(sliderMatrix)
+		self.wSliderLg.valueChanged.connect(sliderMatrix)
+		self.wSliderLb.valueChanged.connect(sliderMatrix)
 
 
 

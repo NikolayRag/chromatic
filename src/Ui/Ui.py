@@ -84,8 +84,7 @@ class Ui():
 		def randColor():
 			_dev.setRGB(*_tool.getColor())
 
-
-		self.appWin.setBehavior(randColor)
+		self.appWin.setBehavior(tool1=randColor, tool2=_dev.setRrrGggBbb)
 
 
 

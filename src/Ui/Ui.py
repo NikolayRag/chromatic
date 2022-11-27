@@ -80,8 +80,12 @@ class Ui():
 
 
 
-	def setup(self, _content):
-		self.appWin.setContent(_content)
+	def setup(self, _dev, _tool):
+		def randColor():
+			_dev.setRGB(*_tool.getColor())
+
+
+		self.appWin.setBehavior(randColor)
 
 
 

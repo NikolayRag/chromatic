@@ -21,7 +21,7 @@ class AppWindow(QObject):
 
 	wMain = None
 	wCaption = None
-	wContent = None
+	wButton = None
 
 
 	flagCheckExit = True
@@ -127,7 +127,7 @@ class AppWindow(QObject):
 		#capture widgets
 		self.wCaption= cMain.findChild(QWidget, "frameCaption")
 
-		self.wContent= cMain.findChild(QWidget, "labContent")
+		self.wButton= cMain.findChild(QPushButton, "btnColor")
 
 		
 
@@ -204,6 +204,11 @@ class AppWindow(QObject):
 
 	def setContent(self, _content):
 		self.wContent.setText(_content)
+
+
+
+	def setBehavior(self, _tool):
+		self.wButton.pressed.connect(_tool)
 
 
 

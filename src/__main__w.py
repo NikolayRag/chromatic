@@ -3,6 +3,10 @@ from os import path
 import Ui
 from Args import *
 
+from device.DeviceDisplay import *
+from tools.ColorTools import *
+
+
 
 AppName = 'chromatic'
 
@@ -34,6 +38,11 @@ resStyle = path.join(modulePath,'Ui/styles/default.qss')
 if __name__ == '__main__':
 	Args(AppPrefs, AppName, cmdlineBlock='Cmdline')
 
+	cDev = DisplayMagnifix()
+	cTools = ColorTools()
+
 	cUi = Ui.Ui(resUi, AppName, resIcon, resStyle)
-	cUi.setup(Args.Cmdline.msg)
+	cUi.setup(cDev, cTools)
 	cUi.go()
+
+	cDev.relax()

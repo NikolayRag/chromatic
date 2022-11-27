@@ -181,12 +181,9 @@
            <number>25</number>
           </property>
           <item row="0" column="0">
-           <widget class="QLabel" name="labContent">
+           <widget class="QPushButton" name="btnColor">
             <property name="text">
-             <string>Default content</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <string>go</string>
             </property>
            </widget>
           </item>

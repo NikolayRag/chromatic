@@ -3,7 +3,7 @@ from os import path
 import Ui
 from Args import *
 
-from device.DeviceDisplay import *
+from device.DeviceMagnifix import *
 from device.DeviceMidiMX import *
 from tools.ColorTools import *
 
@@ -40,7 +40,7 @@ if __name__ == '__main__':
 	Args(AppPrefs, AppName, cmdlineBlock='Cmdline')
 
 	cDev = (
-		DisplayMagnifix(),
+		DeviceMagnifix(),
 		DeviceMidiMX(),
 	)
 	cTools = ColorTools()

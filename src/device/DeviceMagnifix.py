@@ -2,7 +2,7 @@ from ctypes import *
 
 
 
-class DisplayMagnifix():
+class DeviceMagnifix():
 	magnification_api = CDLL('magnification.dll')
 
 	setup = False

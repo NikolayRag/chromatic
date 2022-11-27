@@ -6,8 +6,6 @@ from .AppWindow import *
 class Ui():
 	qApp = None
 
-	appWin = None
-
 	trayIcon = None
 
 
@@ -66,9 +64,12 @@ class Ui():
 
 
 
+##### PUBLIC
+
+
+
 	def __init__(self, _resUi, appName=None, fileIcon=None, fileStyle=None):
 		self.initApp(appName, fileIcon)
-
 
 		self.appWin = self.windowStart(_resUi, fileStyle)
 

@@ -4,6 +4,7 @@ import Ui
 from Args import *
 
 from device.DeviceDisplay import *
+from device.DeviceMidiMX import *
 from tools.ColorTools import *
 
 
@@ -38,7 +39,8 @@ resStyle = path.join(modulePath,'Ui/styles/default.qss')
 if __name__ == '__main__':
 	Args(AppPrefs, AppName, cmdlineBlock='Cmdline')
 
-	cDev = DisplayMagnifix()
+#	cDev = DisplayMagnifix()
+	cDev = DeviceMidiMX()
 	cTools = ColorTools()
 
 	cUi = Ui.Ui(resUi, AppName, resIcon, resStyle)

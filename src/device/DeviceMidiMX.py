@@ -41,4 +41,4 @@ class DeviceMidiMX():
 
 
 	def relax(self):
-		None
+		self.setRGB((0,0,0),(0,0,0))

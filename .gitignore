@@ -2,3 +2,5 @@
 *.sublime-*
 .do.*
 *.do
+build/*
+dist/*

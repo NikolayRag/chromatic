@@ -226,6 +226,25 @@ class AppWindow(QObject):
 
 
 	def setBehavior(self, tool1, tool2):
+		def sliderSet():
+			rgbRGB = tool1()
+
+			self.wSliderRr.setValue(rgbRGB[1][0]*255-rgbRGB[0][0]*255)
+			self.wSliderRg.setValue(0)
+			self.wSliderRb.setValue(0)
+			self.wSliderGr.setValue(0)
+			self.wSliderGg.setValue(rgbRGB[1][1]*255-rgbRGB[0][1]*255)
+			self.wSliderGb.setValue(0)
+			self.wSliderBr.setValue(0)
+			self.wSliderBg.setValue(0)
+			self.wSliderBb.setValue(rgbRGB[1][2]*255-rgbRGB[0][2]*255)
+			self.wSliderLr.setValue(rgbRGB[0][0]*255)
+			self.wSliderLg.setValue(rgbRGB[0][1]*255)
+			self.wSliderLb.setValue(rgbRGB[0][2]*255)
+
+		self.wButton.pressed.connect(sliderSet)
+
+
 		def sliderMatrix():
 			tool2(
 				(self.wSliderRr.value()/255., self.wSliderRg.value()/255., self.wSliderRb.value()/255.),
@@ -233,9 +252,6 @@ class AppWindow(QObject):
 				(self.wSliderBr.value()/255., self.wSliderBg.value()/255., self.wSliderBb.value()/255.),
 				(self.wSliderLr.value()/255., self.wSliderLg.value()/255., self.wSliderLb.value()/255.)
 			)
-
-
-		self.wButton.pressed.connect(tool1)
 
 		self.wSliderRr.valueChanged.connect(sliderMatrix)
 		self.wSliderRg.valueChanged.connect(sliderMatrix)

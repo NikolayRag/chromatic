@@ -81,10 +81,7 @@ class Ui():
 
 
 	def setup(self, _dev, _tool):
-		def randColor():
-			_dev.setRGB(*_tool.getColor())
-
-		self.appWin.setBehavior(tool1=randColor, tool2=_dev.setRrrGggBbb)
+		self.appWin.setBehavior(tool1=_tool.getColor, tool2=_dev.setRrrGggBbb)
 
 
 

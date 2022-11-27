@@ -21,6 +21,10 @@ class DeviceMidiMX():
 
 
 	def setRGB(self, _black, _white):
+		if not self.dev:
+			return
+
+
 		val = int((_white[0]+_black[0])/2*127)
 		val = 0 if val<0 else val
 		self.dev.write_short(0xB0, 0, val)
@@ -41,4 +45,8 @@ class DeviceMidiMX():
 
 
 	def relax(self):
+		if not self.dev:
+			return
+
+
 		self.setRGB((0,0,0),(0,0,0))

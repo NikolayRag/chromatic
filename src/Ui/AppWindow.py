@@ -105,13 +105,13 @@ class AppWindow(QObject):
 
 
 
-	def __init__(self, resUi, resStyle=None, isTray=False, isTool=False, isDnd=False):
+	def __init__(self, fileUi, fileStyle=None, isTray=False, isTool=False, isDnd=False):
 		QObject.__init__(self)
 
 
-		cMain = self.wMain = QUiLoader().load(resUi)
-		if resStyle:
-			self.setStyle(resStyle)
+		cMain = self.wMain = QUiLoader().load(fileUi)
+		if fileStyle:
+			self.setStyle(fileStyle)
 
 
 		BindFilter({
@@ -191,8 +191,8 @@ class AppWindow(QObject):
 
 
 
-	def setStyle(self, _styleFile):
-		with open(_styleFile) as fQss:
+	def setStyle(self, _fileStyle):
+		with open(_fileStyle) as fQss:
 			self.wMain.setStyleSheet(fQss.read())
 
 

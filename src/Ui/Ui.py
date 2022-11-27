@@ -4,34 +4,34 @@ from .AppWindow import *
 
 
 class Ui():
-	resUi = None
-	resIcon = None
-	resStyle = None
-
-
 	qApp = None
+
+	appWin = None
 
 	trayIcon = None
 
 
 
-	def initApp(self, _appName):
+	def initApp(self, _appName, _appIcon):
 		self.qApp = QApplication()
 		self.qApp.setStyle(QStyleFactory.create('fusion'))
-		self.qApp.setWindowIcon(QIcon(self.resIcon))
+		
+		if _appIcon:
+			self.qApp.setWindowIcon(QIcon(_appIcon))
+		
 		if _appName:
 			self.qApp.setApplicationName(_appName)
 
 
 
-	def initTray(self):
-		self.trayIcon = QSystemTrayIcon(QIcon(self.resIcon))
+	def initTray(self, _fileIcon):
+		self.trayIcon = QSystemTrayIcon(QIcon(_fileIcon))
 
 		self.trayIcon.show()
 
 
 
-	def windowStart(self):
+	def windowStart(self, _fileUi, _fileStyle):
 		screenWH = QApplication.primaryScreen().size()
 
 		margin = screenWH *(1-Args.Application.wFactor) *.5
@@ -43,8 +43,8 @@ class Ui():
 
 
 		appWindow = AppWindow(
-			self.resUi,
-			resStyle=self.resStyle,
+			_fileUi,
+			fileStyle=_fileStyle,
 			isTool=Args.Cmdline.tool,
 			isTray=Args.Cmdline.tray,
 			isDnd=Args.Cmdline.dnd
@@ -66,28 +66,30 @@ class Ui():
 
 
 
-	def __init__(self, appName=None, resUi=None, resIcon=None, resStyle=None):
-		self.resUi = resUi
-		self.resIcon = resIcon
-		self.resStyle = resStyle
-
-		self.initApp(appName)
+	def __init__(self, _resUi, appName=None, fileIcon=None, fileStyle=None):
+		self.initApp(appName, fileIcon)
 
 
-		appWin = self.windowStart()
+		self.appWin = self.windowStart(_resUi, fileStyle)
+
 		if Args.Cmdline.tray:
-			self.initTray()
+			self.initTray(fileIcon)
 
-			self.trayIcon.activated.connect(appWin.miniTray)
+			self.trayIcon.activated.connect(self.appWin.miniTray)
 
 
-		appWin.setContent(Args.Cmdline.msg)
 
-		appWin.show()
+	def setup(self, _content):
+		self.appWin.setContent(_content)
+
+
+
+	def go(self):
+		self.appWin.show()
 
 		self.qApp.exec_()
 
-		self.windowSave(appWin)
+		self.windowSave(self.appWin)
 
 
 		logging.warning('Exiting')

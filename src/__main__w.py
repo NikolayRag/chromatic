@@ -34,4 +34,6 @@ resStyle = path.join(modulePath,'Ui/styles/default.qss')
 if __name__ == '__main__':
 	Args(AppPrefs, AppName, cmdlineBlock='Cmdline')
 
-	Ui.Ui(AppName, resUi, resIcon, resStyle)
+	cUi = Ui.Ui(resUi, AppName, resIcon, resStyle)
+	cUi.setup(Args.Cmdline.msg)
+	cUi.go()

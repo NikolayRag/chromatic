@@ -6,13 +6,15 @@ from .AppWindow import *
 class Ui():
 	qApp = None
 
+	appWindow = None
+
 	trayIcon = None
 
 
 
-	def initApp(self, _appName, _appIcon):
+	def initApp(self, _appName, _appIcon, _style):
 		self.qApp = QApplication()
-		self.qApp.setStyle(QStyleFactory.create('fusion'))
+		self.qApp.setStyle(QStyleFactory.create(_style))
 		
 		if _appIcon:
 			self.qApp.setWindowIcon(QIcon(_appIcon))
@@ -29,7 +31,10 @@ class Ui():
 
 
 
-	def windowStart(self, _fileUi, _fileStyle):
+	def windowStart(self, _appWindow):
+		self.appWindow = _appWindow
+
+
 		screenWH = QApplication.primaryScreen().size()
 
 		margin = screenWH *(1-Args.Application.wFactor) *.5
@@ -40,19 +45,9 @@ class Ui():
 		cSize = cSize or screenWH *Args.Application.wFactor
 
 
-		appWindow = AppWindow(
-			_fileUi,
-			fileStyle=_fileStyle,
-			isTool=Args.Cmdline.tool,
-			isTray=Args.Cmdline.tray,
-			isDnd=Args.Cmdline.dnd
-		)
-		appWindow.windowGeometry(cSize, cPos, Args.Application.wMaxi)
+		self.appWindow.windowGeometry(cSize, cPos, Args.Application.wMaxi)
 
-		appWindow.setCheckExit(Args.Cmdline.hold)
-
-
-		return appWindow
+		self.appWindow.setCheckExit(Args.Cmdline.hold)
 
 
 
@@ -68,32 +63,29 @@ class Ui():
 
 
 
-	def __init__(self, _resUi, appName=None, fileIcon=None, fileStyle=None):
-		self.initApp(appName, fileIcon)
+	def __init__(self, appName=None, fileIcon=None):
+		self.initApp(appName, fileIcon, Args.Cmdline.style)
 
-		self.appWin = self.windowStart(_resUi, fileStyle)
 
 		if Args.Cmdline.tray:
 			self.initTray(fileIcon)
 
-			self.trayIcon.activated.connect(self.appWin.miniTray)
 
 
+	def setupWin(self, _window):
+		self.windowStart(_window)
+		self.trayIcon and self.trayIcon.activated.connect(self.appWindow.miniTray)
 
-	def setup(self, _dev, _tool):
-		self.appWin.setBehavior(
-			tool1=_tool.getColor,
-			tool2=list(dev.setRrrGggBbb for dev in _dev)
-		)
-
+		return self.appWindow.setupWin
 
 
+		
 	def go(self):
-		self.appWin.show()
+		self.appWindow.show()
 
 		self.qApp.exec_()
 
-		self.windowSave(self.appWin)
+		self.windowSave(self.appWindow)
 
 
 		logging.warning('Exiting')

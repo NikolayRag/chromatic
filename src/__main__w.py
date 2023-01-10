@@ -1,7 +1,10 @@
 from os import path
 
-import Ui
+import Uiui
 from Args import *
+
+
+from Ui.ChromaticWin import *
 
 from device.DeviceMagnifix import *
 from device.DeviceMidiMX import *
@@ -20,11 +23,9 @@ AppPrefs = {
 		'wMaxi': [False],
 	},
 	'Cmdline': {
-		'tool': [0],
-		'tray': [0],
-		'dnd': [0],
-		'hold': [0],
-		'msg': ['chromatic'],
+		'tray': [False],
+		'hold': [False],
+		'style': ['fusion'],
 	}
 }
 
@@ -45,8 +46,17 @@ if __name__ == '__main__':
 	)
 	cTools = ColorTools()
 
-	cUi = Ui.Ui(resUi, AppName, resIcon, resStyle)
-	cUi.setup(cDev, cTools)
+	cUi = Uiui.Ui(AppName, resIcon)
+	appWindow = ChromaticWin(
+		resUi,
+		fileStyle=resStyle,
+		isTray=Args.Cmdline.tray,
+	)
+	cUi.setupWin(appWindow)(
+		tool1=cTools.getColor,
+		tool2=list(dev.setRrrGggBbb for dev in cDev)
+	)
+
 	cUi.go()
 
 	for d in cDev:

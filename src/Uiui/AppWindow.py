@@ -21,11 +21,7 @@ class AppWindow(QObject):
 
 	wMain = None
 	wCaption = None
-	wButton = None
-	wSliderRr = wSliderRg = wSliderRb = None
-	wSliderGr = wSliderGg = wSliderGb = None
-	wSliderBr = wSliderBg = wSliderBb = None
-	wSliderLr = wSliderLg = wSliderLb = None
+	wContent = None
 
 
 	flagCheckExit = True
@@ -105,7 +101,7 @@ class AppWindow(QObject):
 
 
 
-#########
+######### PUBLIC
 
 
 
@@ -131,21 +127,7 @@ class AppWindow(QObject):
 		#capture widgets
 		self.wCaption= cMain.findChild(QWidget, "frameCaption")
 
-		self.wButton= cMain.findChild(QPushButton, "btnColor")
-
-		self.wSliderRr= cMain.findChild(QSlider, "sliderRr")
-		self.wSliderRg= cMain.findChild(QSlider, "sliderRg")
-		self.wSliderRb= cMain.findChild(QSlider, "sliderRb")
-		self.wSliderGr= cMain.findChild(QSlider, "sliderGr")
-		self.wSliderGg= cMain.findChild(QSlider, "sliderGg")
-		self.wSliderGb= cMain.findChild(QSlider, "sliderGb")
-		self.wSliderBr= cMain.findChild(QSlider, "sliderBr")
-		self.wSliderBg= cMain.findChild(QSlider, "sliderBg")
-		self.wSliderBb= cMain.findChild(QSlider, "sliderBb")
-
-		self.wSliderLr= cMain.findChild(QSlider, "sliderLr")
-		self.wSliderLg= cMain.findChild(QSlider, "sliderLg")
-		self.wSliderLb= cMain.findChild(QSlider, "sliderLb")
+		self.wContent= cMain.findChild(QWidget, "labContent")
 
 		
 
@@ -220,55 +202,8 @@ class AppWindow(QObject):
 
 
 
-	def setContent(self, _content):
+	def setupWin(self, _content):
 		self.wContent.setText(_content)
-
-
-
-	def setBehavior(self, tool1, tool2):
-		def sliderSet():
-			rgbRGB = tool1()
-
-			self.wSliderRr.setValue(rgbRGB[1][0]*255-rgbRGB[0][0]*255)
-			self.wSliderRg.setValue(0)
-			self.wSliderRb.setValue(0)
-			self.wSliderGr.setValue(0)
-			self.wSliderGg.setValue(rgbRGB[1][1]*255-rgbRGB[0][1]*255)
-			self.wSliderGb.setValue(0)
-			self.wSliderBr.setValue(0)
-			self.wSliderBg.setValue(0)
-			self.wSliderBb.setValue(rgbRGB[1][2]*255-rgbRGB[0][2]*255)
-			self.wSliderLr.setValue(rgbRGB[0][0]*255)
-			self.wSliderLg.setValue(rgbRGB[0][1]*255)
-			self.wSliderLb.setValue(rgbRGB[0][2]*255)
-
-		self.wButton.pressed.connect(sliderSet)
-
-
-		def sliderMatrix():
-			for cTool in tool2:
-				cTool(
-					(self.wSliderRr.value()/255., self.wSliderRg.value()/255., self.wSliderRb.value()/255.),
-					(self.wSliderGr.value()/255., self.wSliderGg.value()/255., self.wSliderGb.value()/255.),
-					(self.wSliderBr.value()/255., self.wSliderBg.value()/255., self.wSliderBb.value()/255.),
-					(self.wSliderLr.value()/255., self.wSliderLg.value()/255., self.wSliderLb.value()/255.)
-				)
-		
-		sliderMatrix()
-
-
-		self.wSliderRr.valueChanged.connect(sliderMatrix)
-		self.wSliderRg.valueChanged.connect(sliderMatrix)
-		self.wSliderRb.valueChanged.connect(sliderMatrix)
-		self.wSliderGr.valueChanged.connect(sliderMatrix)
-		self.wSliderGg.valueChanged.connect(sliderMatrix)
-		self.wSliderGb.valueChanged.connect(sliderMatrix)
-		self.wSliderBr.valueChanged.connect(sliderMatrix)
-		self.wSliderBg.valueChanged.connect(sliderMatrix)
-		self.wSliderBb.valueChanged.connect(sliderMatrix)
-		self.wSliderLr.valueChanged.connect(sliderMatrix)
-		self.wSliderLg.valueChanged.connect(sliderMatrix)
-		self.wSliderLb.valueChanged.connect(sliderMatrix)
 
 
 

@@ -172,6 +172,16 @@ class AppWindow(QObject):
 
 	def show(self):
 		self.wMain.show()
+
+
+	def close(self):
+		isVis = self.wMain.isVisible()
+		self.wMain.show() #not to play with setQuitOnLastWindowClosed
+
+		self.wMain.close()
+
+		self.wMain.setVisible(isVis)
+
 	
 
 

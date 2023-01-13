@@ -25,7 +25,14 @@ class Ui():
 
 
 	def initTray(self, _fileIcon):
+		self.actionQuit = QAction("Quit", None)
+
+		self.trayIconMenu = QMenu(None)
+		self.trayIconMenu.addAction(self.actionQuit)
+
+
 		self.trayIcon = QSystemTrayIcon(QIcon(_fileIcon))
+		self.trayIcon.setContextMenu(self.trayIconMenu)
 
 		self.trayIcon.show()
 
@@ -74,7 +81,11 @@ class Ui():
 
 	def setupWin(self, _window):
 		self.windowStart(_window)
-		self.trayIcon and self.trayIcon.activated.connect(self.appWindow.miniTray)
+		if self.trayIcon:
+			self.trayIcon.activated.connect(self.appWindow.miniTray)
+
+			self.actionQuit.triggered.connect(self.appWindow.close)
+
 
 		return self.appWindow.setupWin
 

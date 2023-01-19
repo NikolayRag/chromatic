@@ -175,12 +175,16 @@ class AppWindow(QObject):
 
 
 	def close(self):
+		#  todo 2 (clean) +0: make tray exit check more simple
+		#prevent close if exit canceled while window hidden
 		isVis = self.wMain.isVisible()
-		self.wMain.show() #not to play with setQuitOnLastWindowClosed
+		self.wMain.show()
 
 		self.wMain.close()
 
-		self.wMain.setVisible(isVis)
+		#prevent stay if exit approved while window shown
+		if self.wMain.isVisible():
+			self.wMain.setVisible(isVis)
 
 	
 

@@ -19,7 +19,7 @@ from Ui.ChromaticWin import *
 
 from device.DeviceMagnifix import *
 from device.DeviceMidiMX import *
-from tools.ColorTools import *
+from tool.ColorTools import *
 
 
 

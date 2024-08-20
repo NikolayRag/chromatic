@@ -1,0 +1,28 @@
+base:
+	r,g,b - color
+
+
+	per-spot assignment
+	--- or ---
+	block center - x/xy/xyz
+	block concentrate - 0-1
+
+	block mode - lift/gain
+
+
+	spring time - time for color to change
+	spring bias - make faster at start or at end
+	hold - trigger to start changing color
+
+
+
++wake:
+	dh,dl,ds - randomize colors at wave pulses
+	randomness - per-spot distribution filter
+
+	wave speed - *
+	wave smooth - square/sin wave
+	wave hit - PWM ratio, simmetrical/spike
+	wave jaggy - time distribution randomness
+	wave mass - resonance factor
+
